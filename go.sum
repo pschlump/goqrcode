@@ -1,0 +1,13 @@
+github.com/mattn/go-colorable v0.1.1 h1:G1f5SKeVxmagw/IyvzvtZE4Gybcc4Tr1tf7I8z0XgOg=
+github.com/mattn/go-colorable v0.1.1/go.mod h1:FuOcm+DKB9mbwrcAfNl7/TZVBZ6rcnceauSikq3lYCQ=
+github.com/mattn/go-isatty v0.0.5 h1:tHXDdz1cpzGaovsTB+TVB8q90WEokoVmfMqoVcrLUgw=
+github.com/mattn/go-isatty v0.0.5/go.mod h1:Iq45c/XA43vh69/j3iqttzPXn0bhXyGjM0Hdxcsrc5s=
+github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b h1:j7+1HpAFS1zy5+Q4qx1fWh90gTKwiN4QCGoY9TWyyO4=
+github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b/go.mod h1:01TrycV0kFyexm33Z7vhZRXopbI8J3TDReVlkTgMUxE=
+github.com/pschlump/MiscLib v1.0.0 h1:YVcB78dGbmysnhAI18M+i5ioBVYcCrYNsHq3FYwdJps=
+github.com/pschlump/MiscLib v1.0.0/go.mod h1:33BegrXglROGxpDvBSciKSCc1oEKj6oRgJWD5ZEX+ZI=
+github.com/pschlump/godebug v1.0.0 h1:nCxkq+PtxcY9VN9T8ljsxcXPdvloAX27soEIYtatjrM=
+github.com/pschlump/godebug v1.0.0/go.mod h1:LcS3H2JkmKvbm+SHqvxV4YgOhxuysSpsKhoEOM96Izs=
+github.com/pschlump/json v1.12.0 h1:PjkeVEgEUg+vkHC8CfeXIG4fChev3a7gjl9wYrTnPIE=
+github.com/pschlump/json v1.12.0/go.mod h1:MyeKNxcsYS/AaCqIp6DgPdaE/4NVH49OJVCnQsRoevI=
+golang.org/x/sys v0.0.0-20190222072716-a9d3bda3a223/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=

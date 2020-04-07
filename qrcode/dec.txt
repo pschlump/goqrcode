@@ -1,0 +1,31 @@
+sDec, _ := b64.StdEncoding.DecodeString(sEnc)
+    fmt.Println(string(sDec))
+    fmt.Println()
+
+
+Plan
+
+1. Convert to new library for qr generate / parse
+2. Test tha tuses this to do both
+3. Option of an encrypteed QR - password from CLI or prompt
+4. Save data
+5. Password file ~/.qr-pass.json
+	{
+		"site": [ 
+			{ "resource": "ssh://
+		]
+		, "client": [
+			{
+				"thesis": [
+					{ "password_url": "http://github.com/pschlump/secrets/UUID.json"
+					, "key": "token"
+					}
+				]
+				, "U.W.": [
+					{ "password_url": "http://github.com/pschlump/secrets/UUID.json"
+					, "key": "token2"
+					}
+				]
+			}
+		]
+	}

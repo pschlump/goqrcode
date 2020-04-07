@@ -1,0 +1,7 @@
+*.sw*
+,*
+*.png
+*.svg
+*.jpg
+qrcode/qrcode
+svg

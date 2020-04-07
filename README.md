@@ -2,9 +2,6 @@
 
 This project was cloned because the original author seems to have abandoned it.
 
-A fixed version based on "http://github.com/pschlump/qrcode".  This project did most of the
-original work.
-
 Changed command line to work slightly differently.
 
 Implemented .SVG output.
@@ -19,13 +16,13 @@ Each QR Code contains error recovery information to aid reading damaged or obscu
 
 ## Install
 
-    go get -u github.com/pschlump/qrcode/...
+    go get -u github.com/pschlump/goqrcode/...
 
 A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
 ## Usage
 
-    import qrcode "github.com/pschlump/qrcode"
+    import qrcode "github.com/pschlump/goqrcode"
 
 - **Create a PNG image:**
 
@@ -40,7 +37,7 @@ A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
         err := qrcode.WriteColorFile("https://example.org", qrcode.Medium, 256, color.Black, color.White, "qr.png")
 
-All examples use the qrcode.Medium error Recovery Level and create a fixed
+All examples use the `qrcode.Medium` error Recovery Level and create a fixed
 256x256px size QR Code. The last function creates a white on black instead of black
 on white QR Code.
 

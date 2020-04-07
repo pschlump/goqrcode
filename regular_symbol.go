@@ -4,7 +4,7 @@
 package goqrcode
 
 import (
-	bitset "gitlab.com/pschlump/goqrcode/bitset"
+	bitset "github.com/pschlump/goqrcode/bitset"
 )
 
 type regularSymbol struct {

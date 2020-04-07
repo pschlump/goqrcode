@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"gitlab.com/pschlump/goqrcode"
+	"github.com/pschlump/goqrcode"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 	level := flag.String("l", "h", "Level of errro redundancey, h|m|l for high, medium, low")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, `qrcode -- QR Code encoder in Go
-https://gitlab.com/pschlump/goqrcode
+https://github.com/pschlump/goqrcode
 
 Flags:
 `)

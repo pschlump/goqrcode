@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	bitset "gitlab.com/pschlump/goqrcode/bitset"
+	bitset "github.com/pschlump/goqrcode/bitset"
 )
 
 // gfPoly is a polynomial over GF(2^8).

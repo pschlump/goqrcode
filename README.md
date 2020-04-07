@@ -2,7 +2,7 @@
 
 This project was cloned because the original author seems to have abandoned it.
 
-A fixed version based on "http://gitlab.com/pschlump/qrcode".  This project did most of the
+A fixed version based on "http://github.com/pschlump/qrcode".  This project did most of the
 original work.
 
 Changed command line to work slightly differently.
@@ -19,13 +19,13 @@ Each QR Code contains error recovery information to aid reading damaged or obscu
 
 ## Install
 
-    go get -u gitlab.com/pschlump/qrcode/...
+    go get -u github.com/pschlump/qrcode/...
 
 A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
 ## Usage
 
-    import qrcode "gitlab.com/pschlump/qrcode"
+    import qrcode "github.com/pschlump/qrcode"
 
 - **Create a PNG image:**
 

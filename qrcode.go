@@ -59,8 +59,8 @@ import (
 	"log"
 	"os"
 
-	bitset "gitlab.com/pschlump/goqrcode/bitset"
-	reedsolomon "gitlab.com/pschlump/goqrcode/reedsolomon"
+	bitset "github.com/pschlump/goqrcode/bitset"
+	reedsolomon "github.com/pschlump/goqrcode/reedsolomon"
 )
 
 // Encode a QR Code and return a raw PNG image.

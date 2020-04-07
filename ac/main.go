@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"gitlab.com/pschlump/goqrcode/crypt"
+	"github.com/pschlump/goqrcode/crypt"
 )
 
 func main() {

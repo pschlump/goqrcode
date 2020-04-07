@@ -1,4 +1,4 @@
-module gitlab.com/pschlump/goqrcode
+module github.com/pschlump/goqrcode
 
 go 1.12
 

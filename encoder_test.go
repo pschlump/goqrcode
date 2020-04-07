@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	bitset "gitlab.com/pschlump/goqrcode/bitset"
+	bitset "github.com/pschlump/goqrcode/bitset"
 )
 
 func TestClassifyDataMode(t *testing.T) {

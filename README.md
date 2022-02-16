@@ -8,8 +8,6 @@ Changed command line to work slightly differently.
 
 Implemented .SVG output.
 
-Implemented .JPG output.
-
 Package `goqrcode` implements a QR Code encoder. 
 
 A QR Code is a matrix (two-dimensional) barcode. Arbitrary content may be encoded, with URLs being a popular choice :)

@@ -1,4 +1,6 @@
-# goqrcode
+# goqrcode - Go QR Code Generator Library and Command Line Tool
+
+[![pschlump](https://circleci.com/gh/pschlump/goqrcode.svg?style=svg)](https://app.circleci.com/pipelines/github/pschlump/goqrcode)
 
 This project was cloned because the original author seems to have abandoned it.
 

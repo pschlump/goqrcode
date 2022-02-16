@@ -20,6 +20,19 @@ Each QR Code contains error recovery information to aid reading damaged or obscu
 
 A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
+## Command Line Tool
+
+In the ./qrcode directory there is a command line tool.
+
+```
+$ cd ./qrcode
+$ go build
+$ ./qrcode -o test1.png "otpauth://totp/www.2c-why.com:pschlump@gmail.com?secret=4S62BZNFXXSZLCRO&issuer=www.2c-why.com"
+```
+
+Will create test1.png containing the url.
+
+
 ## Usage
 
     import qrcode "github.com/pschlump/goqrcode"

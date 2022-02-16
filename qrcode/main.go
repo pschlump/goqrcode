@@ -40,10 +40,6 @@ Options:
 	-l Level		Level is h, m, l for high, medium, low levesl of qr error correction
 	
 `)
-		// xyzzy - add SVG
-		// xyzzy - add in image merge, paint one image over QR (for PNG, SVG) - must be able to position
-		// xyzzy - add set of border size on QR
-		// xyzzy - add of forground / background color
 
 	}
 	flag.Parse()

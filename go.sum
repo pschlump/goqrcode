@@ -28,6 +28,8 @@ github.com/pschlump/godebug v1.0.4 h1:X37zf4qXgsQhT4mceDet768mAimjxFDpsis7zEl8A8
 github.com/pschlump/godebug v1.0.4/go.mod h1:0g877qgD7yUdH5NUqp6hg/QTvR0LLIBGpuk7FeUlmWE=
 github.com/pschlump/goqrsvg v1.0.0 h1:xoXI2YVepJthdOqSPxCExB8+BBuFZwSh0FVz/vA1inw=
 github.com/pschlump/goqrsvg v1.0.0/go.mod h1:UxH/y96jvYSCD0DDSC+Kogae5IzspeCdHqKZnh09EC8=
+github.com/pschlump/goqrsvg v1.0.1 h1:JthZzbKTnCXjrsfCHSOqb6X/YykpQ4iO+bapnq7REI8=
+github.com/pschlump/goqrsvg v1.0.1/go.mod h1:UxH/y96jvYSCD0DDSC+Kogae5IzspeCdHqKZnh09EC8=
 github.com/pschlump/json v0.0.0-20180316172947-0d2e6a308e08/go.mod h1:MyeKNxcsYS/AaCqIp6DgPdaE/4NVH49OJVCnQsRoevI=
 github.com/pschlump/json v1.12.0 h1:PjkeVEgEUg+vkHC8CfeXIG4fChev3a7gjl9wYrTnPIE=
 github.com/pschlump/json v1.12.0/go.mod h1:MyeKNxcsYS/AaCqIp6DgPdaE/4NVH49OJVCnQsRoevI=

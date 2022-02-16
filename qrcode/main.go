@@ -95,9 +95,7 @@ Options:
 	}
 
 	if *svgArt {
-		// TODO -------------------------------------------------------------------------------
-		// TODO if *negative {
-		genqr(content, out)
+		genqr(content, *negative, out)
 		return
 	}
 
@@ -114,7 +112,7 @@ Options:
 	out.Write(png)
 }
 
-func genqr(uu string, fp *os.File) {
+func genqr(uu string, neg bool, fp *os.File) {
 	s := svg.New(fp)
 
 	// Create the QR Code in SVG
@@ -123,7 +121,11 @@ func genqr(uu string, fp *os.File) {
 	// Write QR code to SVG
 	qs := goqrsvg.NewQrSVG(qrCode, 5)
 	qs.StartQrSVG(s)
-	qs.WriteQrSVG(s)
+	if neg {
+		qs.WriteQrSVGInverse(s) // func (qs *QrSVG) WriteQrSVGInverse(s *svg.SVG) error {
+	} else {
+		qs.WriteQrSVG(s)
+	}
 
 	s.End()
 }

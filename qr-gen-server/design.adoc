@@ -1,0 +1,11 @@
+
+= Design for this
+
+http://.../qr-gen?fmt=SVG|PNG|SVG-fragment&url=Text
+
+Generate a SVG, a SVG-Fragment, or a PNG with q QR in it.
+
+size=256
+
+level=H|M|L
+

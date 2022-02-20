@@ -1,5 +1,6 @@
 
 all:
+	go build
 
 gen_code:
 	mkdir -p ./params

@@ -12,8 +12,6 @@ import (
 	"github.com/pschlump/goqrsvg"
 )
 
-// params "github.com/pschlump/goqrcode/qr-gen-server/params"
-
 func main() {
 	http.Handle("/", http.HandlerFunc(genqr))
 	err := http.ListenAndServe(":2003", nil)
@@ -24,24 +22,12 @@ func main() {
 
 func genqr(www http.ResponseWriter, req *http.Request) {
 
-	var method bool
-	var err error
-	var pp params.ApiTestDataType
 	// size, url
 	// redundancy H, M, L
 	// fmt PNG, SVG, SVG-fragment
-
-	if req.Method == "GET" {
-		pp, method, err = params.ParseGETParams(www, req) //  (rv ApiTestDataType, methodGet bool, err error) {
-		_, _ = method, err
-		fmt.Printf("GET: %s\n", godebug.SVarI(pp))
-	} else if req.Method == "POST" {
-		pp, method, err = params.ParsePOSTParams(www, req) //  (rv ApiTestDataType, methodGet bool, err error) {
-		_, _ = method, err
-		fmt.Printf("POST: %s\n", godebug.SVarI(pp))
-	} else {
-		www.WriteHeader(http.StatusMethodNotAllowed) // 405
-		fmt.Fprintf(www, "Invalid Method")
+	pp, err := params.ParseParams(www, req, "GET", "POST")
+	fmt.Printf("%s: %s\n", req.Method, godebug.SVarI(pp))
+	if err != nil {
 		return
 	}
 

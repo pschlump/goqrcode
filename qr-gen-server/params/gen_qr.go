@@ -6,14 +6,15 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/pschlump/filelib"
 	"github.com/pschlump/req_param/reqlib"
 )
 
 type ApiTestDataType struct {
-	Url    string
 	Fmt    string
 	Invert bool
 	Size   int
+	Url    string
 }
 
 func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataType, methodPost bool, err error) {
@@ -25,26 +26,6 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		var n64 int64
 
 		req.ParseForm()
-
-		// --------------------------------------------------------------------
-		// Parameter: url
-		// Method: POST
-		// --------------------------------------------------------------------
-		s = req.Form.Get("url")
-
-		if "" != "" {
-			s = ""
-		} else if false {
-			log.Println("Url Param 'url' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'url' paramter\n")
-			err = fmt.Errorf("Missing 'url' paramter")
-			return
-		} else {
-			s = ""
-		}
-
-		rv.Url = s
 
 		// --------------------------------------------------------------------
 		// Parameter: fmt
@@ -123,6 +104,26 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		}
 		rv.Size = int(n64)
 
+		// --------------------------------------------------------------------
+		// Parameter: url
+		// Method: POST
+		// --------------------------------------------------------------------
+		s = req.Form.Get("url")
+
+		if "" != "" {
+			s = ""
+		} else if false {
+			log.Println("Url Param 'url' is missing")
+			www.WriteHeader(http.StatusBadRequest) // 400
+			fmt.Fprintf(www, "Missing 'url' paramter\n")
+			err = fmt.Errorf("Missing 'url' paramter")
+			return
+		} else {
+			s = ""
+		}
+
+		rv.Url = s
+
 	}
 	return
 }
@@ -136,6 +137,27 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 		var s string
 		var ok, b bool
 		var n64 int64
+
+		// --------------------------------------------------------------------
+		// Parameter: fmt
+		// Method: GET
+		// --------------------------------------------------------------------
+		sA, ok = params["fmt"]
+		if ok && len(sA) >= 1 {
+			s = sA[0]
+		} else if "png" != "" {
+			s = "png"
+		} else if false {
+			log.Println("Url Param 'fmt' is missing")
+			www.WriteHeader(http.StatusBadRequest) // 400
+			fmt.Fprintf(www, "Missing 'fmt' paramter\n")
+			err = fmt.Errorf("Missing 'fmt' paramter")
+			return
+		} else {
+			s = ""
+		}
+
+		rv.Fmt = s
 
 		// --------------------------------------------------------------------
 		// Parameter: invert
@@ -217,27 +239,20 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 
 		rv.Url = s
 
-		// --------------------------------------------------------------------
-		// Parameter: fmt
-		// Method: GET
-		// --------------------------------------------------------------------
-		sA, ok = params["fmt"]
-		if ok && len(sA) >= 1 {
-			s = sA[0]
-		} else if "png" != "" {
-			s = "png"
-		} else if false {
-			log.Println("Url Param 'fmt' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'fmt' paramter\n")
-			err = fmt.Errorf("Missing 'fmt' paramter")
-			return
-		} else {
-			s = ""
-		}
+	}
+	return
+}
 
-		rv.Fmt = s
-
+func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...string) (rv ApiTestDataType, err error) {
+	if (req.Method == "GET" || req.Method == "DELETE") && filelib.InArray(req.Method, validMethod) {
+		rv, _, err = ParseGETParams(www, req)
+	} else if (req.Method == "POST" || req.Method == "PUT") && filelib.InArray(req.Method, validMethod) {
+		rv, _, err = ParsePOSTParams(www, req)
+	} else {
+		www.WriteHeader(http.StatusMethodNotAllowed) // 405
+		fmt.Fprintf(www, "Invalid Method: %s\n", req.Method)
+		err = fmt.Errorf("Invalid Method: %s", req.Method)
+		return
 	}
 	return
 }

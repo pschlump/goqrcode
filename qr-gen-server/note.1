@@ -1,0 +1,42 @@
+
+/api/gen-qr
+{
+	"url": {
+		"type":"string"
+		}
+	, "fmt": {
+		"type":"string"
+		, "list": "svg", "png", "svg-grament"
+		, "default":"png"
+		}
+	, "size": {
+		"type":"int"
+		, "min": 64
+		, "max": 2048
+		, "default": 256
+		}
+	, "invert": {
+		"type": "bool"
+		, "default": false
+		},
+}
+
+=> 
+
+type ApiGenQr struct {
+	Url string
+	Fmt string
+	Size int
+	Invert bool
+}
+
+type ApiEntry struct {
+	Type string
+	List []string
+	Default string
+	Min int
+	Max int
+}
+
+type ApiSpec map[string]ApiEntry
+

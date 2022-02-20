@@ -1,0 +1,24 @@
+{
+	"fmt": {
+		"default": "png",
+		"list": [
+			"svg",
+			"png",
+			"svg-grament"
+		],
+		"type": "string"
+	},
+	"invert": {
+		"default": "false",
+		"type": "bool"
+	},
+	"size": {
+		"default": "256",
+		"max": 2048,
+		"min": 64,
+		"type": "int"
+	},
+	"url": {
+		"type": "string"
+	}
+}

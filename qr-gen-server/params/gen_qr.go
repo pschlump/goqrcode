@@ -28,6 +28,8 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		var b bool
 		var n64 int64
 
+		_, _ = b, n64
+
 		req.ParseForm()
 
 		// --------------------------------------------------------------------
@@ -140,6 +142,8 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 		var s string
 		var ok, b bool
 		var n64 int64
+
+		_, _ = b, n64
 
 		// --------------------------------------------------------------------
 		// Parameter: fmt

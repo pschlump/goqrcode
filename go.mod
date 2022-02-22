@@ -10,7 +10,6 @@ require (
 	github.com/pschlump/godebug v1.0.4
 	github.com/pschlump/goqrsvg v1.0.1
 	github.com/pschlump/json v1.12.0
-	github.com/pschlump/req_param v1.0.0
 )
 
 require (
@@ -24,4 +23,5 @@ require (
 // MiscLib v1.0.3
 // ansi v1.0.1
 
-replace github.com/pschlump/req_param => ../req_param
+// replace github.com/pschlump/req_param => ../req_param
+// github.com/pschlump/req_param v1.0.0

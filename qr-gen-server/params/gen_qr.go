@@ -10,17 +10,16 @@ import (
 	"strconv"
 
 	"github.com/pschlump/filelib"
-	"github.com/pschlump/req_param/reqlib"
 )
 
-type ApiTestDataType struct {
+type ApiDataType struct {
 	Fmt    string
 	Invert bool
 	Size   int
 	Url    string
 }
 
-func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataType, methodPost bool, err error) {
+func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType, methodPost bool, err error) {
 
 	if req.Method == "POST" {
 		methodPost = true
@@ -38,16 +37,8 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		// --------------------------------------------------------------------
 		s = req.Form.Get("fmt")
 
-		if "png" != "" {
-			s = "png"
-		} else if false {
-			log.Println("Url Param 'fmt' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'fmt' paramter\n")
-			err = fmt.Errorf("Missing 'fmt' paramter")
-			return
-		} else {
-			s = ""
+		if s == "" {
+			s = "png" // Apply Defaulit Value
 		}
 
 		rv.Fmt = s
@@ -58,19 +49,11 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		// --------------------------------------------------------------------
 		s = req.Form.Get("invert")
 
-		if "false" != "" {
-			s = "false"
-		} else if false {
-			log.Println("Url Param 'invert' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'invert' paramter\n")
-			err = fmt.Errorf("Missing 'invert' paramter")
-			return
-		} else {
-			s = ""
+		if s == "" {
+			s = "false" // Apply Defaulit Value
 		}
 
-		b, err = reqlib.ParseBool(s)
+		b, err = ParseBool(s)
 		if err != nil {
 			log.Println("Url Param 'invert' is invalid boolean: %s", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
@@ -87,16 +70,8 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		// --------------------------------------------------------------------
 		s = req.Form.Get("size")
 
-		if "256" != "" {
-			s = "256"
-		} else if false {
-			log.Println("Url Param 'size' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'size' paramter\n")
-			err = fmt.Errorf("Missing 'size' paramter")
-			return
-		} else {
-			s = ""
+		if s == "" {
+			s = "256" // Apply Defaulit Value
 		}
 
 		n64, err = strconv.ParseInt(s, 10, 64)
@@ -115,53 +90,36 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiTestData
 		// --------------------------------------------------------------------
 		s = req.Form.Get("url")
 
-		if "" != "" {
-			s = ""
-		} else if false {
-			log.Println("Url Param 'url' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'url' paramter\n")
-			err = fmt.Errorf("Missing 'url' paramter")
-			return
-		} else {
-			s = ""
-		}
-
 		rv.Url = s
 
 	}
 	return
 }
 
-func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataType, methodGet bool, err error) {
+func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType, methodPost bool, err error) {
 
-	if req.Method == "GET" {
-		methodGet = true
-		params := req.URL.Query()
-		var sA []string
+	if req.Method == "POST" {
+		methodPost = true
 		var s string
-		var ok, b bool
+		var sA []string
+		var b, ok bool
 		var n64 int64
-
-		_, _ = b, n64
+		params := req.URL.Query()
+		_, _, _ = b, n64, ok
 
 		// --------------------------------------------------------------------
 		// Parameter: fmt
 		// Method: GET
 		// --------------------------------------------------------------------
 		sA, ok = params["fmt"]
+
+		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
-		} else if "png" != "" {
-			s = "png"
-		} else if false {
-			log.Println("Url Param 'fmt' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'fmt' paramter\n")
-			err = fmt.Errorf("Missing 'fmt' paramter")
-			return
-		} else {
-			s = ""
+		}
+
+		if !ok || len(sA) == 0 {
+			s = "png" // Apply Defaulit Value
 		}
 
 		rv.Fmt = s
@@ -171,21 +129,17 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 		// Method: GET
 		// --------------------------------------------------------------------
 		sA, ok = params["invert"]
+
+		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
-		} else if "false" != "" {
-			s = "false"
-		} else if false {
-			log.Println("Url Param 'invert' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'invert' paramter\n")
-			err = fmt.Errorf("Missing 'invert' paramter")
-			return
-		} else {
-			s = ""
 		}
 
-		b, err = reqlib.ParseBool(s)
+		if !ok || len(sA) == 0 {
+			s = "false" // Apply Defaulit Value
+		}
+
+		b, err = ParseBool(s)
 		if err != nil {
 			log.Println("Url Param 'invert' is invalid boolean: %s", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
@@ -201,18 +155,14 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 		// Method: GET
 		// --------------------------------------------------------------------
 		sA, ok = params["size"]
+
+		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
-		} else if "256" != "" {
-			s = "256"
-		} else if false {
-			log.Println("Url Param 'size' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'size' paramter\n")
-			err = fmt.Errorf("Missing 'size' paramter")
-			return
-		} else {
-			s = ""
+		}
+
+		if !ok || len(sA) == 0 {
+			s = "256" // Apply Defaulit Value
 		}
 
 		n64, err = strconv.ParseInt(s, 10, 64)
@@ -230,18 +180,10 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 		// Method: GET
 		// --------------------------------------------------------------------
 		sA, ok = params["url"]
+
+		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
-		} else if "" != "" {
-			s = ""
-		} else if false {
-			log.Println("Url Param 'url' is missing")
-			www.WriteHeader(http.StatusBadRequest) // 400
-			fmt.Fprintf(www, "Missing 'url' paramter\n")
-			err = fmt.Errorf("Missing 'url' paramter")
-			return
-		} else {
-			s = ""
 		}
 
 		rv.Url = s
@@ -250,7 +192,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiTestDataT
 	return
 }
 
-func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...string) (rv ApiTestDataType, err error) {
+func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...string) (rv ApiDataType, err error) {
 	if (req.Method == "GET" || req.Method == "DELETE") && filelib.InArray(req.Method, validMethod) {
 		rv, _, err = ParseGETParams(www, req)
 	} else if (req.Method == "POST" || req.Method == "PUT") && filelib.InArray(req.Method, validMethod) {
@@ -261,5 +203,47 @@ func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...stri
 		err = fmt.Errorf("Invalid Method: %s", req.Method)
 		return
 	}
+	return
+}
+
+var trueValues map[string]bool
+
+func init() {
+	trueValues = make(map[string]bool)
+
+	trueValues["t"] = true
+	trueValues["T"] = true
+	trueValues["yes"] = true
+	trueValues["Yes"] = true
+	trueValues["YES"] = true
+	trueValues["1"] = true
+	trueValues["true"] = true
+	trueValues["True"] = true
+	trueValues["TRUE"] = true
+	trueValues["on"] = true
+	trueValues["On"] = true
+	trueValues["ON"] = true
+
+	trueValues["f"] = false
+	trueValues["F"] = false
+	trueValues["no"] = false
+	trueValues["No"] = false
+	trueValues["NO"] = false
+	trueValues["0"] = false
+	trueValues["false"] = false
+	trueValues["False"] = false
+	trueValues["FALSE"] = false
+	trueValues["off"] = false
+	trueValues["Off"] = false
+	trueValues["OFF"] = false
+}
+
+func ParseBool(s string) (b bool, err error) {
+	v, ok := trueValues[s]
+	if ok {
+		b = v
+		return
+	}
+	err = fmt.Errorf("Invalid Boolean Value")
 	return
 }

@@ -55,7 +55,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 
 		b, err = ParseBool(s)
 		if err != nil {
-			log.Println("Url Param 'invert' is invalid boolean: %s", err)
+			log.Printf("Url Param 'invert' is invalid boolean: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'invert' is invalid boolean, %s\n", err)
 			err = fmt.Errorf("Url Param 'invert' is invalid boolean, %s", err)
@@ -76,7 +76,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 
 		n64, err = strconv.ParseInt(s, 10, 64)
 		if err != nil {
-			log.Println("Url Param 'size' is invalid integer: %s", err)
+			log.Printf("Url Param 'size' is invalid integer: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'size' is invalid integer, %s\n", err)
 			err = fmt.Errorf("Url Param 'size' is invalid integer, %s", err)
@@ -141,7 +141,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 
 		b, err = ParseBool(s)
 		if err != nil {
-			log.Println("Url Param 'invert' is invalid boolean: %s", err)
+			log.Printf("Url Param 'invert' is invalid boolean: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'invert' is invalid boolean, %s\n", err)
 			err = fmt.Errorf("Url Param 'invert' is invalid boolean, %s", err)
@@ -167,7 +167,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 
 		n64, err = strconv.ParseInt(s, 10, 64)
 		if err != nil {
-			log.Println("Url Param 'size' is invalid integer: %s", err)
+			log.Printf("Url Param 'size' is invalid integer: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'size' is invalid integer, %s\n", err)
 			err = fmt.Errorf("Url Param 'size' is invalid integer, %s", err)

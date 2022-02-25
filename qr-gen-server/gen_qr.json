@@ -1,10 +1,7 @@
 {
 	"fmt": {
 		"default": "png",
-		"list": [
-			"svg",
-			"png"
-		],
+		"list": [ "svg", "png" ],
 		"type": "string"
 	},
 	"invert": {
@@ -19,5 +16,10 @@
 	},
 	"url": {
 		"type": "string"
+	},
+	"redundancy": {
+		"type": "string",
+		"default": "M",
+		"list": [ "H", "M", "L" ]
 	}
 }

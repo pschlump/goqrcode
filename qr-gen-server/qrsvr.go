@@ -61,6 +61,8 @@ func genqr(www http.ResponseWriter, req *http.Request) {
 
 	} else if pp.Fmt == "png" {
 
+		www.Header().Set("Content-Type", "image/png")
+
 		redundancy := goqrcode.Highest // xyzzy TODO
 
 		// Generate the QR code in internal format

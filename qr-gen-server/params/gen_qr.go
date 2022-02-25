@@ -10,14 +10,14 @@ import (
 	"strconv"
 
 	"github.com/pschlump/filelib"
-	"github.com/pschlump/godebug"
 )
 
 type ApiDataType struct {
-	Fmt    string
-	Invert bool
-	Size   int
-	Url    string
+	Fmt        string
+	Invert     bool
+	Redundancy string
+	Size       int
+	Url        string
 }
 
 func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType, methodPost bool, err error) {
@@ -64,6 +64,18 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 		}
 
 		rv.Invert = b
+
+		// --------------------------------------------------------------------
+		// Parameter: redundancy
+		// Method: POST
+		// --------------------------------------------------------------------
+		s = req.Form.Get("redundancy")
+
+		if s == "" {
+			s = "M" // Apply Defaulit Value
+		}
+
+		rv.Redundancy = s
 
 		// --------------------------------------------------------------------
 		// Parameter: size
@@ -152,6 +164,23 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		rv.Invert = b
 
 		// --------------------------------------------------------------------
+		// Parameter: redundancy
+		// Method: GET
+		// --------------------------------------------------------------------
+		sA, ok = params["redundancy"]
+
+		s = ""
+		if ok && len(sA) >= 1 {
+			s = sA[0]
+		}
+
+		if !ok || len(sA) == 0 {
+			s = "M" // Apply Defaulit Value
+		}
+
+		rv.Redundancy = s
+
+		// --------------------------------------------------------------------
 		// Parameter: size
 		// Method: GET
 		// --------------------------------------------------------------------
@@ -182,8 +211,6 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		// --------------------------------------------------------------------
 		sA, ok = params["url"]
 
-		fmt.Printf("sA(url) = %s %v, params=%s\n", sA, ok, params)
-
 		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
@@ -196,12 +223,9 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 }
 
 func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...string) (rv ApiDataType, err error) {
-	fmt.Printf("********************************* Ype Yep\n")
 	if (req.Method == "GET" || req.Method == "DELETE") && filelib.InArray(req.Method, validMethod) {
-		fmt.Printf("AT: %s\n", godebug.LF())
 		rv, _, err = ParseGETParams(www, req)
 	} else if (req.Method == "POST" || req.Method == "PUT") && filelib.InArray(req.Method, validMethod) {
-		fmt.Printf("AT: %s\n", godebug.LF())
 		rv, _, err = ParsePOSTParams(www, req)
 	} else {
 		www.WriteHeader(http.StatusMethodNotAllowed) // 405

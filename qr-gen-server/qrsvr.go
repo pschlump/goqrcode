@@ -32,9 +32,6 @@ func genqr(www http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// xyzzy - if pp.Fmt == "svg"
-	// xyzzy - if pp.Fmt == "png"
-
 	if pp.Fmt == "svg" {
 
 		s := svg.New(www)

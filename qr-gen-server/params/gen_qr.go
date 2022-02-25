@@ -10,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/pschlump/filelib"
+	"github.com/pschlump/godebug"
 )
 
 type ApiDataType struct {
@@ -98,7 +99,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 
 func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType, methodPost bool, err error) {
 
-	if req.Method == "POST" {
+	if req.Method == "GET" {
 		methodPost = true
 		var s string
 		var sA []string
@@ -181,6 +182,8 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		// --------------------------------------------------------------------
 		sA, ok = params["url"]
 
+		fmt.Printf("sA(url) = %s %v, params=%s\n", sA, ok, params)
+
 		s = ""
 		if ok && len(sA) >= 1 {
 			s = sA[0]
@@ -193,9 +196,12 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 }
 
 func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...string) (rv ApiDataType, err error) {
+	fmt.Printf("********************************* Ype Yep\n")
 	if (req.Method == "GET" || req.Method == "DELETE") && filelib.InArray(req.Method, validMethod) {
+		fmt.Printf("AT: %s\n", godebug.LF())
 		rv, _, err = ParseGETParams(www, req)
 	} else if (req.Method == "POST" || req.Method == "PUT") && filelib.InArray(req.Method, validMethod) {
+		fmt.Printf("AT: %s\n", godebug.LF())
 		rv, _, err = ParsePOSTParams(www, req)
 	} else {
 		www.WriteHeader(http.StatusMethodNotAllowed) // 405

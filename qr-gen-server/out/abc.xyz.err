@@ -1,0 +1,10 @@
+--2022-02-25 15:39:33--  http://127.0.0.1:2003/?url=abc.xyz
+Connecting to 127.0.0.1:2003... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 278 [image/png]
+Saving to: ‘out/abc.xyz.png’
+
+     0K                                                       100% 24.1M=0s
+
+2022-02-25 15:39:33 (24.1 MB/s) - ‘out/abc.xyz.png’ saved [278/278]
+

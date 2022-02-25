@@ -8,6 +8,7 @@ import (
 	svg "github.com/ajstarks/svgo"
 	"github.com/boombuler/barcode/qr"
 	"github.com/pschlump/godebug"
+	"github.com/pschlump/goqrcode"
 	params "github.com/pschlump/goqrcode/qr-gen-server/params"
 	"github.com/pschlump/goqrsvg"
 )
@@ -31,17 +32,57 @@ func genqr(www http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	s := svg.New(www)
-	www.Header().Set("Content-Type", "image/svg+xml")
+	// xyzzy - if pp.Fmt == "svg"
+	// xyzzy - if pp.Fmt == "png"
 
-	// Create the QR Code in SVG
-	// qrCode, _ := qr.Encode("Hello World", qr.M, qr.Auto)
-	qrCode, _ := qr.Encode(pp.Url, qr.M, qr.Auto)
+	if pp.Fmt == "svg" {
 
-	// Write QR code to SVG
-	qs := goqrsvg.NewQrSVG(qrCode, 5)
-	qs.StartQrSVG(s)
-	qs.WriteQrSVG(s)
+		s := svg.New(www)
+		www.Header().Set("Content-Type", "image/svg+xml")
 
-	s.End()
+		// Create the QR Code in SVG
+		// qrCode, _ := qr.Encode("Hello World", qr.M, qr.Auto)
+		qrCode, err := qr.Encode(pp.Url, qr.M, qr.Auto)
+		if err != nil {
+			fmt.Printf("error: %s\n", err)
+			// error processing -- TODO
+		}
+
+		if db1 {
+			fmt.Printf("at: %s Params: %+v\n", godebug.LF(), pp)
+		}
+
+		// Write QR code to SVG
+		qs := goqrsvg.NewQrSVG(qrCode, 5)
+		qs.StartQrSVG(s)
+		qs.WriteQrSVG(s)
+
+		s.End()
+
+	} else if pp.Fmt == "png" {
+
+		redundancy := goqrcode.Highest // xyzzy TODO
+
+		// Generate the QR code in internal format
+		var err error
+		var q *goqrcode.QRCode
+		q, err = goqrcode.New(pp.Url, redundancy)
+		goqrcode.CheckError(err)
+
+		// Swap colors
+		if pp.Invert {
+			q.ForegroundColor, q.BackgroundColor = q.BackgroundColor, q.ForegroundColor
+		}
+
+		// Output QR Code as a PNG
+		var png []byte
+		png, err = q.PNG(pp.Size)
+		goqrcode.CheckError(err)
+
+		www.Write(png)
+
+	}
+
 }
+
+var db1 = true

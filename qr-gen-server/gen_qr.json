@@ -3,8 +3,7 @@
 		"default": "png",
 		"list": [
 			"svg",
-			"png",
-			"svg-grament"
+			"png"
 		],
 		"type": "string"
 	},

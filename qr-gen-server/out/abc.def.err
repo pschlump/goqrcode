@@ -1,0 +1,10 @@
+--2022-02-25 15:39:33--  http://127.0.0.1:2003/?url=abc.def&fmt=svg
+Connecting to 127.0.0.1:2003... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [image/svg+xml]
+Saving to: ‘out/abc.def.svg’
+
+     0K .......... .......... .......... ..                    72.9M=0s
+
+2022-02-25 15:39:33 (72.9 MB/s) - ‘out/abc.def.svg’ saved [33460]
+

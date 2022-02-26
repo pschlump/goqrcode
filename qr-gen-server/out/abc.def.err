@@ -1,10 +1,10 @@
---2022-02-25 15:51:31--  http://127.0.0.1:2003/?url=abc.def&fmt=svg
+--2022-02-25 16:11:48--  http://127.0.0.1:2003/?url=abc.def&fmt=svg
 Connecting to 127.0.0.1:2003... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [image/svg+xml]
 Saving to: ‘out/abc.def.svg’
 
-     0K .......... .......... .......... ..                    68.9M=0s
+     0K .......... .......... .......... ..                    42.0M=0.001s
 
-2022-02-25 15:51:31 (68.9 MB/s) - ‘out/abc.def.svg’ saved [33460]
+2022-02-25 16:11:48 (42.0 MB/s) - ‘out/abc.def.svg’ saved [33460]
 

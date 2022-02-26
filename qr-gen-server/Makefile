@@ -22,3 +22,7 @@ test2:
 	mkdir -p out
 	wget -o out/abc.xyz.err -O out/abc.xyz.png 'http://127.0.0.1:2003/?url=abc.xyz'
 	diff out/abc.xyz.png ref
+
+
+tidy:
+		go mod tidy -compat=1.17

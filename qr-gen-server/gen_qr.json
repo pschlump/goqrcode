@@ -1,7 +1,7 @@
 {
 	"fmt": {
 		"default": "png",
-		"list": [ "svg", "png" ],
+		"list": [ "svg", "png", "text" ],
 		"type": "string"
 	},
 	"invert": {
@@ -10,7 +10,7 @@
 	},
 	"size": {
 		"default": "256",
-		"max": 2048,
+		"max": 1024000,
 		"min": 64,
 		"type": "int"
 	},

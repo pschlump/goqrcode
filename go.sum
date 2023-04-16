@@ -40,12 +40,12 @@ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZN
 github.com/pschlump/MiscLib v1.0.1/go.mod h1:33BegrXglROGxpDvBSciKSCc1oEKj6oRgJWD5ZEX+ZI=
 github.com/pschlump/MiscLib v1.0.3 h1:2F7ZUkWJhBTIM7XaGb8L0bzO1l7jXi/lVFTRWXpElac=
 github.com/pschlump/MiscLib v1.0.3/go.mod h1:kNxJuPVgvnv69Yt9Dr6eQgShL4kK7elSA1Nz3/G2eBg=
-github.com/pschlump/ReadConfig v1.0.2 h1:sJ3myY3z0ydu2vhpZxwJpcdgUDfRulmvxEnrjU+t6oY=
-github.com/pschlump/ReadConfig v1.0.2/go.mod h1:Xc/V+wpYAmtr9sxM/3EWvpHmhC20QpbakuCvJN3Fa7Q=
+github.com/pschlump/ReadConfig v1.0.5 h1:7CXVk2r9yWAKH4+/Sdg3VfQ4xDyyPrNxtyrDTy4pACQ=
+github.com/pschlump/ReadConfig v1.0.5/go.mod h1:/Ve5wnZgAkjxUH6LSO+hZ5w/f97BWbGw6GHkKSbUxHY=
 github.com/pschlump/ansi v1.0.1 h1:NR7hBOgTV/shQwzwLmk4X/bVoUzvyIrwlB5k8wWnl7A=
 github.com/pschlump/ansi v1.0.1/go.mod h1:dwr2CQhjyMjSNA9wpCOux2+MhQiqoelfvBKkTYNBNuA=
-github.com/pschlump/dbgo v1.0.3 h1:YW+124ccToMXECiZ6RpBUC4yj3Kr6qL30Z0gEiHDykI=
-github.com/pschlump/dbgo v1.0.3/go.mod h1:331fyL7CL32ataZ1K/tQk5t1anNj58QXt5kTe0PwmkI=
+github.com/pschlump/dbgo v1.0.6 h1:l06MgeEXav4Px7koDZdtIXY4FUmVf8ecpXyOubCgNAc=
+github.com/pschlump/dbgo v1.0.6/go.mod h1:331fyL7CL32ataZ1K/tQk5t1anNj58QXt5kTe0PwmkI=
 github.com/pschlump/filelib v1.0.6 h1:KJdAoE+5ovlpHrfs4CTGJDXmHCEyGK+sx3CKmBajgDw=
 github.com/pschlump/filelib v1.0.6/go.mod h1:CxEa7t6Y1lukm2ar5iMbm1imu8fN4V52tgrWtXUqd1g=
 github.com/pschlump/gintools v1.0.2 h1:5w4rN4LrKVUj8Ni8GI8pIh/JFVTjMiwgSjj718lZY9o=

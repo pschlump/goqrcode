@@ -21,3 +21,6 @@ test4:
 	qrcode -svg -o out/test4.svg "otpauth://totp/www.2c-why.com:pschlump@gmail.com?secret=4S62BZNFXXSZLCRO&issuer=www.2c-why.com"
 	diff out/test4.svg ref/test4.svg
 
+install:
+	rm -f ~/bin/qrcode
+	( cd ~/bin ; ln -s ~/go/src/github.com/pschlump/goqrcode/qrcode/qrcode . )

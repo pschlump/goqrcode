@@ -1,11 +1,11 @@
 module github.com/pschlump/goqrcode
 
-go 1.18
+go 1.19
 
 require (
 	github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
 	github.com/boombuler/barcode v1.0.1
-	github.com/pschlump/ReadConfig v1.0.2
+	github.com/pschlump/ReadConfig v1.0.5
 	github.com/pschlump/filelib v1.0.6
 	github.com/pschlump/gintools v1.0.2
 	github.com/pschlump/godebug v1.0.4
@@ -21,7 +21,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/pschlump/MiscLib v1.0.3 // indirect
 	github.com/pschlump/ansi v1.0.1 // indirect
-	github.com/pschlump/dbgo v1.0.3 // indirect
+	github.com/pschlump/dbgo v1.0.6 // indirect
 	github.com/pschlump/json v1.12.0 // indirect
 	github.com/pschlump/json5 v1.0.0 // indirect
 	github.com/pschlump/jsonSyntaxErrorLib v1.0.4 // indirect

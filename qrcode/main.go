@@ -37,6 +37,8 @@ Usage: After the options the "string" that is passed is encoded into the qr-code
 Example:
        qrcode -o id_1234467721.png "http://www.mysite.com/qr-display/1234467721" 
 
+       qrcode -o xyz.svg -svg "http://www.mysite.com/qr-display/1234467721" 
+
 Options:
 	-o File			Output file name (will add .png if you do not specify it)
 	-s ImageSize	Pixel size of image, 256 is the default.

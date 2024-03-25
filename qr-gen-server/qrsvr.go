@@ -10,7 +10,7 @@ import (
 
 	svg "github.com/ajstarks/svgo"
 	"github.com/boombuler/barcode/qr"
-	"github.com/pschlump/godebug"
+	"github.com/pschlump/dbgo"
 	"github.com/pschlump/goqrcode"
 	params "github.com/pschlump/goqrcode/qr-gen-server/params"
 	"github.com/pschlump/goqrsvg"
@@ -112,7 +112,7 @@ func genqr(www http.ResponseWriter, req *http.Request) {
 	// redundancy H, M, L
 	// fmt PNG, SVG, SVG-fragment
 	pp, err := params.ParseParams(www, req, "GET", "POST")
-	fmt.Printf("%s: %s, error:%s, at:%s\n", req.Method, godebug.SVarI(pp), err, godebug.LF())
+	fmt.Printf("%s: %s, error:%s, at:%s\n", req.Method, dbgo.SVarI(pp), err, dbgo.LF())
 	if err != nil {
 		return
 	}
@@ -147,7 +147,7 @@ func genqr_bl(www http.ResponseWriter, req *http.Request, pp params.ApiDataType)
 		}
 
 		if DbOn["echo-params-1"] {
-			fmt.Printf("at: %s Params: %+v\n", godebug.LF(), pp)
+			fmt.Printf("at: %s Params: %+v\n", dbgo.LF(), pp)
 		}
 
 		// Write QR code to SVG

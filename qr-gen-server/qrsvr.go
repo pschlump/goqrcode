@@ -23,8 +23,11 @@ import (
 
 // TODO
 // var TLS_crt = flag.String("tls_crt", "", "TLS Signed Publick Key")
+// TODO
 // var TLS_key = flag.String("tls_key", "", "TLS Signed Private Key")
+// TODO
 // var ChkTables = flag.Bool("chk-tables", false, "Chack table structre and exit")
+
 var Cfg = flag.String("cfg", "cfg.json", "config file for this call")
 var HostPort = flag.String("hostport", ":2003", "Host/Port to listen on")
 var DbFlagParam = flag.String("db_flag", "", "Additional Debug Flags")

@@ -90,7 +90,6 @@ Options:
 
 	if *textArt {
 		// Output the QR Code as a string
-		// TODO if *negative {
 		art := q.ToString(*negative)
 		fmt.Fprintf(out, art)
 		return

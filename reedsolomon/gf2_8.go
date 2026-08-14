@@ -76,20 +76,8 @@ var (
 // gfElement is an element in GF(2^8).
 type gfElement uint8
 
-// newGFElement creates and returns a new gfElement.
-func newGFElement(data byte) gfElement {
-	return gfElement(data)
-}
-
 // gfAdd returns a + b.
 func gfAdd(a, b gfElement) gfElement {
-	return a ^ b
-}
-
-// gfSub returns a - b.
-//
-// Note addition is equivalent to subtraction in GF(2).
-func gfSub(a, b gfElement) gfElement {
 	return a ^ b
 }
 

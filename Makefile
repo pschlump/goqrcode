@@ -1,10 +1,17 @@
+.PHONY: all build test lint clean
 
-all:
-	go build
+all: build
 
+build:
+	go build ./...
 
-test001:
-	go test
-	diff ./out/example.png ./ref/example.png
+test:
+	go vet ./...
+	go test ./...
 
+## lint: run golangci-lint
+lint:
+	golangci-lint run ./...
 
+clean:
+	rm -f qrcode/qrcode qr-gen-server/qr-gen-server

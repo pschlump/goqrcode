@@ -12,9 +12,6 @@ import (
 )
 
 func TestClassifyDataMode(t *testing.T) {
-	type Test struct {
-	}
-
 	tests := []struct {
 		data   []byte
 		actual []segment
@@ -53,7 +50,9 @@ func TestClassifyDataMode(t *testing.T) {
 
 	for _, test := range tests {
 		encoder := newDataEncoder(dataEncoderType1To9)
-		encoder.encode(test.data)
+		if _, err := encoder.encode(test.data); err != nil {
+			t.Fatalf("Got %s, expected success", err)
+		}
 
 		if !reflect.DeepEqual(test.actual, encoder.actual) {
 			t.Errorf("Got %v, expected %v", encoder.actual, test.actual)

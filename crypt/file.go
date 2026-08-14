@@ -1,24 +1,24 @@
 package crypt
 
 import (
-	"io/ioutil"
+	"fmt"
 	"os"
 )
 
-//sDec, _ := b64.StdEncoding.DecodeString(sEnc)
-//  fmt.Println(string(sDec))
-// fmt.Println()
-
-func EncryptFile(filename string, data []byte, passphrase string) {
-	f, _ := os.Create(filename)
-	defer f.Close()
-	f.Write(EncryptWithPassphrase(data, passphrase))
+// EncryptFile encrypts data with passphrase and writes the result to filename.
+func EncryptFile(filename string, data []byte, passphrase string) error {
+	ciphertext, err := EncryptWithPassphrase(data, passphrase)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(filename, ciphertext, 0600)
 }
 
-func DecryptFile(filename string, passphrase string) []byte {
-	data, _ := ioutil.ReadFile(filename)
-	return DecryptWithPasphrase(data, passphrase)
+// DecryptFile reads filename and decrypts its contents with passphrase.
+func DecryptFile(filename string, passphrase string) ([]byte, error) {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, fmt.Errorf("reading %s: %w", filename, err)
+	}
+	return DecryptWithPassphrase(data, passphrase)
 }
-
-// func EncryptWithPassphrase(data []byte, passphrase string) []byte {
-// func DecryptWithPasphrase(data []byte, passphrase string) []byte {

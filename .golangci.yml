@@ -1,0 +1,10 @@
+version: "2"
+
+linters:
+  settings:
+    errcheck:
+      exclude-functions:
+        - fmt.Printf
+        - fmt.Fprintf
+        - github.com/pschlump/dbgo.Printf
+        - github.com/pschlump/dbgo.Fprintf

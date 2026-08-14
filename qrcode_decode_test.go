@@ -179,7 +179,9 @@ func zbarimgCheck(q *QRCode) error {
 	}
 
 	if s != q.Content {
-		q.WriteFile(256, fmt.Sprintf("%x.png", q.Content))
+		if err := q.WriteFile(256, fmt.Sprintf("%x.png", q.Content)); err != nil {
+			return fmt.Errorf("unable to write QR code to file: %s", err)
+		}
 		return fmt.Errorf("got '%s' (%x) expected '%s' (%x)", s, s, q.Content, q.Content)
 	}
 

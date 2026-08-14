@@ -30,7 +30,12 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 
 		_, _ = b, n64
 
-		req.ParseForm()
+		if err = req.ParseForm(); err != nil {
+			log.Printf("Unable to parse form: %s\n", err)
+			www.WriteHeader(http.StatusBadRequest) // 400
+			fmt.Fprintf(www, "Unable to parse form, %s\n", err)
+			return
+		}
 
 		// --------------------------------------------------------------------
 		// Parameter: fmt
@@ -39,7 +44,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 		s = req.Form.Get("fmt")
 
 		if s == "" {
-			s = "png" // Apply Defaulit Value
+			s = "png" // Apply Default Value
 		}
 
 		rv.Fmt = s
@@ -51,7 +56,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 		s = req.Form.Get("invert")
 
 		if s == "" {
-			s = "false" // Apply Defaulit Value
+			s = "false" // Apply Default Value
 		}
 
 		b, err = ParseBool(s)
@@ -59,7 +64,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 			log.Printf("Url Param 'invert' is invalid boolean: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'invert' is invalid boolean, %s\n", err)
-			err = fmt.Errorf("Url Param 'invert' is invalid boolean, %s", err)
+			err = fmt.Errorf("url param 'invert' is invalid boolean: %s", err)
 			return
 		}
 
@@ -72,7 +77,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 		s = req.Form.Get("redundancy")
 
 		if s == "" {
-			s = "M" // Apply Defaulit Value
+			s = "M" // Apply Default Value
 		}
 
 		rv.Redundancy = s
@@ -84,7 +89,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 		s = req.Form.Get("size")
 
 		if s == "" {
-			s = "256" // Apply Defaulit Value
+			s = "256" // Apply Default Value
 		}
 
 		n64, err = strconv.ParseInt(s, 10, 64)
@@ -92,7 +97,7 @@ func ParsePOSTParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType
 			log.Printf("Url Param 'size' is invalid integer: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'size' is invalid integer, %s\n", err)
-			err = fmt.Errorf("Url Param 'size' is invalid integer, %s", err)
+			err = fmt.Errorf("url param 'size' is invalid integer: %s", err)
 			return
 		}
 		rv.Size = int(n64)
@@ -132,7 +137,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		}
 
 		if !ok || len(sA) == 0 {
-			s = "png" // Apply Defaulit Value
+			s = "png" // Apply Default Value
 		}
 
 		rv.Fmt = s
@@ -149,7 +154,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		}
 
 		if !ok || len(sA) == 0 {
-			s = "false" // Apply Defaulit Value
+			s = "false" // Apply Default Value
 		}
 
 		b, err = ParseBool(s)
@@ -157,7 +162,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 			log.Printf("Url Param 'invert' is invalid boolean: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'invert' is invalid boolean, %s\n", err)
-			err = fmt.Errorf("Url Param 'invert' is invalid boolean, %s", err)
+			err = fmt.Errorf("url param 'invert' is invalid boolean: %s", err)
 			return
 		}
 
@@ -175,7 +180,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		}
 
 		if !ok || len(sA) == 0 {
-			s = "M" // Apply Defaulit Value
+			s = "M" // Apply Default Value
 		}
 
 		rv.Redundancy = s
@@ -192,7 +197,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 		}
 
 		if !ok || len(sA) == 0 {
-			s = "256" // Apply Defaulit Value
+			s = "256" // Apply Default Value
 		}
 
 		n64, err = strconv.ParseInt(s, 10, 64)
@@ -200,7 +205,7 @@ func ParseGETParams(www http.ResponseWriter, req *http.Request) (rv ApiDataType,
 			log.Printf("Url Param 'size' is invalid integer: %s\n", err)
 			www.WriteHeader(http.StatusBadRequest) // 400
 			fmt.Fprintf(www, "Url Param 'size' is invalid integer, %s\n", err)
-			err = fmt.Errorf("Url Param 'size' is invalid integer, %s", err)
+			err = fmt.Errorf("url param 'size' is invalid integer: %s", err)
 			return
 		}
 		rv.Size = int(n64)
@@ -230,7 +235,7 @@ func ParseParams(www http.ResponseWriter, req *http.Request, validMethod ...stri
 	} else {
 		www.WriteHeader(http.StatusMethodNotAllowed) // 405
 		fmt.Fprintf(www, "Invalid Method: %s\n", req.Method)
-		err = fmt.Errorf("Invalid Method: %s", req.Method)
+		err = fmt.Errorf("invalid method: %s", req.Method)
 		return
 	}
 	return
@@ -274,6 +279,6 @@ func ParseBool(s string) (b bool, err error) {
 		b = v
 		return
 	}
-	err = fmt.Errorf("Invalid Boolean Value")
+	err = fmt.Errorf("invalid boolean value %q", s)
 	return
 }

@@ -51,11 +51,11 @@ package goqrcode
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -112,12 +112,12 @@ func WriteColorFile(content string, level RecoveryLevel, size int, background,
 
 	q, err := New(content, level)
 
-	q.BackgroundColor = background
-	q.ForegroundColor = foreground
-
 	if err != nil {
 		return err
 	}
+
+	q.BackgroundColor = background
+	q.ForegroundColor = foreground
 
 	return q.WriteFile(size, filename)
 }
@@ -209,7 +209,7 @@ func newWithForcedVersion(content string, version int, level RecoveryLevel) (*QR
 	case version >= 27 && version <= 40:
 		encoder = newDataEncoder(dataEncoderType27To40)
 	default:
-		log.Fatalf("Invalid version %d (expected 1-40 inclusive)", version)
+		return nil, fmt.Errorf("invalid version %d (expected 1-40 inclusive)", version)
 	}
 
 	var encoded *bitset.Bitset
@@ -365,7 +365,7 @@ func (q *QRCode) WriteFile(size int, filename string) error {
 		return err
 	}
 
-	return ioutil.WriteFile(filename, png, os.FileMode(0644))
+	return os.WriteFile(filename, png, os.FileMode(0644))
 }
 
 // encode completes the steps required to encode the QR Code. These include
@@ -491,15 +491,6 @@ func (q *QRCode) encodeBlocks() *bitset.Bitset {
 	result.AppendNumBools(q.version.numRemainderBits, false)
 
 	return result
-}
-
-// max returns the maximum of a and b.
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
 }
 
 // addPadding pads the encoded data upto the full length required.
